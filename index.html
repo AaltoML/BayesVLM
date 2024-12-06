@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="BayesVLM">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BayesVLM</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="">  -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎈</text></svg>">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <link href="static/css/twentytwenty.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Post-hoc Probabilistic Vision-Language Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.de/citations?user=4CEGXaYAAAAJ">Anton Baumann</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://ruili-pml.github.io/">Rui Li</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://marcusklasson.github.io/">Marcus Klasson</a><sup>2,3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=35fWh2oAAAAJ">Santeri Mentu</a><sup>2,3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sgk98.github.io/">Shyamgopal Karthik</a><sup>4,5,6</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.helmholtz-munich.de/en/chc/eml/pi/zeynep-akata">Zeynep Akata</a><sup>1,5,6,7</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://users.aalto.fi/~asolin/">Arno Solin</a><sup>2,3</sup>
+            </span>
+            <span class="author-block">
+              <a href="https://trappmartin.github.io/website/">Martin Trapp</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>1</sup>Technical University of Munich,</span>
+            <span class="author-block"><sup>2</sup>Aalto University,</span>
+            <span class="author-block"><sup>3</sup>Finnish Center for Artificial Intelligence,</span>
+            <span class="author-block"><sup>4</sup>University of Tübingen,</span>
+            <span class="author-block"><sup>5</sup>Helmholtz Munich,</span>
+            <span class="author-block"><sup>6</sup>Munich Center for Machine Learning (MCML),</span>
+            <span class="author-block"><sup>7</sup>Munich Data Science Institute (MDSI)</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/pdf/2411.19756"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2411.19756"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/AaltoML/bayesVLM"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="margin-top: -50px;">
+    <div class="container is-max-desktop">
+      <!-- TLDR. -->
+      <div class="content" style="display: flex;">
+          <h2 class="title is-5" style="margin-right: 10px; white-space: nowrap; letter-spacing: -2px;">
+            <span style="color: red;">T</span>
+            <span style="color: blue;">L</span>
+            <span style="color: green;">D</span>
+            <span style="color: orange;">R</span>
+            <span style="color: black;">:</span>
+            </h2>
+          <div class="content has-text-justified">
+            <p>
+                <b>We make vision-language models (VLMs) probabilistic by introducing a Bayesian approach to their final layers. This enables interpretable, well-calibrated predictions and improves performance in active learning and safety-critical tasks without additional training.</b>
+            </p>
+          </div>
+      </div>
+      <!--/ TLDR. -->
+    </div>
+  </section>
+
+<section class="teaser">
+  <div class="container is-max-desktop">
+    <div class="columns is-vcentered interpolation-panel" style="background-color: white;">
+        <img src="asset/teaser.png" style="max-width: 450px; margin: 0 auto;"/>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+  Vision-language models (VLMs), such as CLIP and SigLIP, have found remarkable success in classification, retrieval, and generative tasks.
+	For this, VLMs deterministically map images and text descriptions to a joint latent space in which their similarity is assessed using the cosine similarity. 
+	However, a deterministic mapping of inputs fails to capture uncertainties over concepts arising from domain shifts when used in downstream tasks. 
+	In this work, we propose post-hoc uncertainty estimation in VLMs that does not require additional training.
+	Our method leverages a Bayesian posterior approximation over the last layers in VLMs and analytically quantifies uncertainties over cosine similarities.
+  We demonstrate its effectiveness for uncertainty quantification and support set selection in active learning.   
+	Compared to baselines, we obtain improved and well-calibrated predictive uncertainties, interpretable uncertainty estimates, and sample-efficient active learning.
+  Our results show promise for safety-critical applications of large-scale models.
+  
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="has-text-centered" >
+      <h2 class="title is-3">Pipeline</h2>
+      <div class="columns is-four-fifths">
+        <img src="asset/pipeline.png" style="width: 80%; height: auto;  margin: 0 auto;"\>
+      </div>
+        <p><b>Illustration of uncertainty propagation in VLMs:</b> We estimate uncertainties
+          over the last linear layers of both encoders using a Laplace approximation, which
+          induces distributions over the feature projections. We then approximate the distribution
+          over cosine similarities by estimating the expected value and variance accordingly. The
+          cosine similarity distribution is then propagated further to the output</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code class="language-bibtex">@article{wang2024desplat,
+  title = {{DeSplat}: {D}ecomposed {G}aussian Splatting for Distractor-Free Rendering},
+  author = {Yihao Wang and Marcus Klasson and Matias Turkulainen and Shuzhe Wang and Juho Kannala and Arno Solin},
+  year = {2024},
+  journal = {arXiv preprint arxiv:2411.19756}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> 
+            and is based on the <a
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> website. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="static/css/bootstrap.min.js"></script>
+<!-- <script src="/js/offcanvas.js"></script> -->
+<script src="static/css/jquery.event.move.js"></script>
+<script src="static/css/jquery.twentytwenty.js"></script>
+
+<script>
+    $(window).load(function () { $(".twentytwenty-container").twentytwenty({ default_offset_pct: 0.5 }); });
+</script>
+
+</body>
+</html>
