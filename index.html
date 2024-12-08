@@ -133,8 +133,7 @@
             <span style="color: black;">:</span>
             </h2>
           <div class="content has-text-justified">
-            <p>
-                <b>We make vision-language models (VLMs) probabilistic by introducing a Bayesian approach to their final layers. This enables interpretable, well-calibrated predictions and improves performance in active learning and safety-critical tasks without additional training.</b>
+            <p><b>We propose a well-principled and efficient post-hoc uncertainty estimation approach for large-scale vision-language models (VLMs) combined with analytic propagation of uncertainties applicable to any probabilistic VLM model. Our approach enables interpretable and well-calibrated uncertainty estimates and improves performance in active learning without additional training.</b>
             </p>
           </div>
       </div>
@@ -159,15 +158,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-  Vision-language models (VLMs), such as CLIP and SigLIP, have found remarkable success in classification, retrieval, and generative tasks.
-	For this, VLMs deterministically map images and text descriptions to a joint latent space in which their similarity is assessed using the cosine similarity. 
-	However, a deterministic mapping of inputs fails to capture uncertainties over concepts arising from domain shifts when used in downstream tasks. 
-	In this work, we propose post-hoc uncertainty estimation in VLMs that does not require additional training.
-	Our method leverages a Bayesian posterior approximation over the last layers in VLMs and analytically quantifies uncertainties over cosine similarities.
-  We demonstrate its effectiveness for uncertainty quantification and support set selection in active learning.   
-	Compared to baselines, we obtain improved and well-calibrated predictive uncertainties, interpretable uncertainty estimates, and sample-efficient active learning.
-  Our results show promise for safety-critical applications of large-scale models.
-  
+  Vision-language models (VLMs), such as CLIP and SigLIP, have found remarkable success in classification, retrieval, and generative tasks. For this, VLMs deterministically map images and text descriptions to a joint latent space in which their similarity is assessed using the cosine similarity. However, a deterministic mapping of inputs fails to capture uncertainties over concepts arising from domain shifts when used in downstream tasks. In this work, we propose post-hoc uncertainty estimation in VLMs that does not require additional training. Our method leverages a Bayesian posterior approximation over the last layers in VLMs and analytically quantifies uncertainties over cosine similarities. We demonstrate its effectiveness for uncertainty quantification and support set selection in active learning. Compared to baselines, we obtain improved and well-calibrated predictive uncertainties, interpretable uncertainty estimates, and sample-efficient active learning. Our results show promise for safety-critical applications of large-scale models.
           </p>
         </div>
       </div>
@@ -195,10 +186,10 @@
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code class="language-bibtex">@article{wang2024desplat,
-  title = {{DeSplat}: {D}ecomposed {G}aussian Splatting for Distractor-Free Rendering},
-  author = {Yihao Wang and Marcus Klasson and Matias Turkulainen and Shuzhe Wang and Juho Kannala and Arno Solin},
+  title = {{BayesVLM}: Post-hoc Probabilistic Vision-Language Models}},
+  author = {Anton Baumann, Rui Li, Marcus Klasson, Santeri Mentu, Shyamgopal Karthik, Zeynep Akata, Arno Solin and Martin Trapp},
   year = {2024},
-  journal = {arXiv preprint arxiv:2411.19756}
+  journal = {arXiv preprint}
 }</code></pre>
   </div>
 </section>
