@@ -1,6 +1,6 @@
-# DeSplat Project Page
+# BayesVLM Project Page
 
-This is the repository that contains source code for the [DeSplat website](https://aaltoml.github.io/desplat/).
+This repository contains source code for the [BayesVLM website](https://aaltoml.github.io/BayesVLM/).
 
 Adapted from the [Nerfies website](https://nerfies.github.io/).
 
