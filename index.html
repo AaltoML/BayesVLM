@@ -171,71 +171,6 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3 has-text-centered">Overview</h2>
-
-        <div class="has-text-centered">
-          <img src="asset/pipeline.png" loading="lazy" style="width: 100%; height: auto; margin: 0 auto;" />
-        </div>
-
-        <p class="content has-text-justified" style="margin-top: 10px;">
-          <b>Illustration of uncertainty propagation in VLMs:</b> We estimate uncertainties
-          over the last linear layers of both encoders using a Laplace approximation, which
-          induces distributions over the feature projections. We then approximate the distribution
-          over cosine similarities by estimating the expected value and variance accordingly. The
-          cosine similarity distribution is then propagated further to the output.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =======================
-     DESIDERATA (Intro framing)
-======================= -->
-<section class="section" id="desiderata" style="padding-top: 0;">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Desiderata</h2>
-        <div class="content has-text-justified">
-          <p>
-            We aim for uncertainty estimation in pre-trained VLMs that is:
-          </p>
-          <div class="table-container" style="margin-top: 0.75rem;">
-            <table class="table is-fullwidth is-striped">
-              <tbody>
-                <tr>
-                  <td style="width: 34%;"><b>Model-agnostic</b></td>
-                  <td>Applicable to different VLM architectures.</td>
-                </tr>
-                <tr>
-                  <td><b>Post-hoc</b></td>
-                  <td>No training from scratch.</td>
-                </tr>
-                <tr>
-                  <td><b>Efficient</b></td>
-                  <td>Low inference overhead.</td>
-                </tr>
-                <tr>
-                  <td><b>Effective</b></td>
-                  <td>Captures relevant uncertainty sources.</td>
-                </tr>
-                <tr>
-                  <td><b>Training-free</b></td>
-                  <td>No adapters or additional learned components.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- =======================
      CONTRIBUTIONS (as in paper)
@@ -296,6 +231,23 @@
       </div>
     </div>
 
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+
+        <div class="has-text-centered">
+          <img src="asset/pipeline.png" loading="lazy" style="width: 100%; height: auto; margin: 0 auto;" />
+        </div>
+
+        <p class="content has-text-justified" style="margin-top: 10px;">
+          <b>Illustration of uncertainty propagation in VLMs:</b> We estimate uncertainties
+          over the last linear layers of both encoders using a Laplace approximation, which
+          induces distributions over the feature projections. We then approximate the distribution
+          over cosine similarities by estimating the expected value and variance accordingly. The
+          cosine similarity distribution is then propagated further to the output.
+        </p>
+      </div>
+    </div>
+
     <div class="columns is-centered" style="margin-top: -10px;">
       <div class="column is-four-fifths">
         <h3 class="title is-4">ProbCosine: Analytic Cosine Similarity Uncertainty</h3>
@@ -315,26 +267,6 @@
         <p class="content has-text-justified" style="margin-top: 10px;">
           <b>ProbCosine approximation.</b> Analytic moment-matching closely tracks the cosine similarity distribution across uncertainty levels, providing an efficient alternative to sampling.
         </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =======================
-     APPLICATION (Sec. 3.3 framing)
-======================= -->
-<section class="section" id="active-learning" style="padding-top: 0;">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Application: Probabilistic Active Few-shot Learning</h2>
-        <div class="content has-text-justified">
-          <p>
-            We apply BayesVLM to <b>probabilistic zero-shot classification</b> and to <b>active few-shot adaptation</b>.
-            In active learning, BayesVLM’s predictive uncertainties drive support-set selection via Bayesian acquisition functions (e.g., <b>BALD</b> and <b>EPIG</b>),
-            combined with target-region selection in feature space.
-          </p>
-        </div>
       </div>
     </div>
   </div>
@@ -371,16 +303,13 @@
 
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-centered">
-        <a href="asset/table1_zeroshot_results.png" target="_blank" rel="noopener noreferrer">
-          <img src="asset/table1_zeroshot_results.png" loading="lazy"
-               style="width: 100%; height: auto; margin: 0 auto;" />
-        </a>
+        <img src="asset/table1_zeroshot_results.png" loading="lazy"
+              style="width: 100%; height: auto; margin: 0 auto;" />
         <p class="content has-text-justified" style="margin-top: 10px;">
           <b>Zero-shot uncertainty quantification (Table&nbsp;1).</b>
           BayesVLM achieves comparable accuracy to deterministic CLIP while substantially improving
           calibration (ECE ↓) and negative log predictive density (NLPD ↓).
         </p>
-        <p class="is-size-7" style="margin-top: -6px;">Click the table to open the full-resolution image.</p>
       </div>
     </div>
 
@@ -474,9 +403,8 @@
     <pre><code class="language-bibtex">@inproceedings{baumann2026bayesvlm,
   title     = {Post-hoc Probabilistic Vision-Language Models},
   author    = {Baumann, Anton and Li, Rui and Klasson, Marcus and Mentu, Santeri and Karthik, Shyamgopal and Akata, Zeynep and Solin, Arno and Trapp, Martin},
-  booktitle = {International Conference on Learning Representations (ICLR)},
+  booktitle = {International Conference on Learning Representations {(ICLR)}},
   year      = {2026},
-  note      = {arXiv:2412.06014}
 }</code></pre>
   </div>
 </section>
