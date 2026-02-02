@@ -37,6 +37,10 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">Post-hoc Probabilistic Vision-Language Models</h1>
+          <div class="is-size-5" style="margin-top: 0.6rem;">
+            <span class="tag is-info is-light is-medium" style="font-weight: 600;">ICLR 2026</span>
+          </div>
+          <br />
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://scholar.google.de/citations?user=4CEGXaYAAAAJ">Anton Baumann</a><sup>1</sup>,</span>
@@ -133,7 +137,8 @@
             <span style="color: black;">:</span>
             </h2>
           <div class="content has-text-justified">
-            <p><b>We propose a well-principled and efficient post-hoc uncertainty estimation approach for large-scale vision-language models (VLMs) combined with analytic propagation of uncertainties applicable to any probabilistic VLM model. Our approach enables interpretable and well-calibrated uncertainty estimates and improves performance in active learning without additional training.</b>
+            <p>
+               We present a <b>training-free</b>, post-hoc Bayesian method for uncertainty estimation in vision–language models. It yields interpretable and well-calibrated uncertainties, enables analytic uncertainty propagation, and improves active learning across VLMs.
             </p>
           </div>
       </div>
@@ -166,18 +171,228 @@
   </div>
 </section>
 
-<section class="section">
+
+<!-- =======================
+     CONTRIBUTIONS (as in paper)
+======================= -->
+<section class="section" id="contributions" style="padding-top: 0;">
   <div class="container is-max-desktop">
-    <div class="has-text-centered" >
-      <h2 class="title is-3">Pipeline</h2>
-      <div class="columns is-four-fifths">
-        <img src="asset/pipeline.png" style="width: 80%; height: auto;  margin: 0 auto;"\>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Contributions</h2>
+        <div class="content has-text-justified">
+          <ul>
+            <li>
+              We propose <b>BayesVLM</b>, a post-hoc method for uncertainty quantification in pre-trained VLMs
+              <b>without architecture changes or further training</b>.
+            </li>
+            <li>
+              We present a Bayesian formulation for VLMs and derive an <b>analytic approximation</b>
+              of the distribution over cosine similarities (<b>ProbCosine</b>) for efficient uncertainty propagation.
+            </li>
+            <li>
+              We demonstrate BayesVLM’s utility in <b>zero-shot</b> settings and <b>active learning</b>,
+              and assess <b>efficiency and robustness</b> (including proxy-data Hessian estimation).
+            </li>
+          </ul>
+        </div>
       </div>
-        <p><b>Illustration of uncertainty propagation in VLMs:</b> We estimate uncertainties
+    </div>
+  </div>
+</section>
+
+<!-- =======================
+     METHODS (Sec. 3.2 framing)
+======================= -->
+<section class="section" id="methods">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Methods</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>BayesVLM</b> is a post-hoc probabilistic VLM: it combines a Bayesian posterior approximation over the final projection layers
+            with uncertainty propagation from probabilistic embeddings to downstream predictions. <b>ProbCosine</b> provides the analytic step that
+            propagates Gaussian embedding uncertainty to a distribution over cosine similarities.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-4">BayesVLM: Laplace Posterior over Projection Layers</h3>
+        <div class="content has-text-justified">
+          <p>
+            We approximate the Bayesian posterior of the final projection matrices (image and text) with a Laplace approximation
+            using a tractable likelihood approximation and a curvature approximation for efficiency (Kronecker-factored GGN).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+
+        <div class="has-text-centered">
+          <img src="asset/pipeline.png" loading="lazy" style="width: 100%; height: auto; margin: 0 auto;" />
+        </div>
+
+        <p class="content has-text-justified" style="margin-top: 10px;">
+          <b>Illustration of uncertainty propagation in VLMs:</b> We estimate uncertainties
           over the last linear layers of both encoders using a Laplace approximation, which
           induces distributions over the feature projections. We then approximate the distribution
           over cosine similarities by estimating the expected value and variance accordingly. The
-          cosine similarity distribution is then propagated further to the output.</p>
+          cosine similarity distribution is then propagated further to the output.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered" style="margin-top: -10px;">
+      <div class="column is-four-fifths">
+        <h3 class="title is-4">ProbCosine: Analytic Cosine Similarity Uncertainty</h3>
+        <div class="content has-text-justified">
+          <p>
+            ProbCosine analytically propagates uncertainty from (approximately) Gaussian-distributed image and text embeddings to a probabilistic cosine similarity.
+            We moment-match the resulting cosine similarity distribution (mean and variance), enabling efficient uncertainty-aware inference without Monte Carlo sampling.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered" style="margin-top: 0.75rem;">
+      <div class="column is-four-fifths has-text-centered">
+        <img src="asset/fig_probcosine_density.png" loading="lazy"
+             style="width: 70%; height: auto; margin: 0 auto;" />
+        <p class="content has-text-justified" style="margin-top: 10px;">
+          <b>ProbCosine approximation.</b> Analytic moment-matching closely tracks the cosine similarity distribution across uncertainty levels, providing an efficient alternative to sampling.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =======================
+     EXPERIMENTS (Sec. 4 framing: the three questions)
+======================= -->
+<section class="section" id="experiments">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+          <p>We evaluate BayesVLM along three questions:</p>
+          <ol>
+            <li><b>Uncertainty quantification:</b> Does BayesVLM provide reliable uncertainty estimates in zero-shot settings?</li>
+            <li><b>Active learning:</b> Can BayesVLM uncertainties select informative fine-tuning data?</li>
+            <li><b>Efficiency &amp; robustness:</b> What overhead is introduced, and how robust is BayesVLM (incl. proxy data)?</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-4" style="margin-top: 1.5rem;">4.1 Uncertainty Quantification</h3>
+        <p class="content has-text-justified" style="margin-top: -0.5rem;">
+          We show that BayesVLM yields well-calibrated uncertainty estimates in the zero-shot setting, reducing overconfident errors under domain shift.
+          Compared to deterministic VLM baselines, BayesVLM improves uncertainty quality while maintaining competitive predictive performance.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <img src="asset/table1_zeroshot_results.png" loading="lazy"
+              style="width: 100%; height: auto; margin: 0 auto;" />
+        <p class="content has-text-justified" style="margin-top: 10px;">
+          <b>Zero-shot uncertainty quantification (Table&nbsp;1).</b>
+          BayesVLM achieves comparable accuracy to deterministic CLIP while substantially improving
+          calibration (ECE ↓) and negative log predictive density (NLPD ↓).
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <img src="asset/fig2_calibration.png" loading="lazy"
+             style="width: 90%; height: auto; margin: 0 auto;" />
+        <p class="content has-text-justified" style="margin-top: 10px;">
+          <b>Zero-shot calibration (Fig. 2):</b> BayesVLM reduces overconfident predictions and improves calibration.
+        </p>
+        <p class="content has-text-justified" style="margin-top: 4px;">
+          <b>Uncertainty vs. error before/after active learning.</b> Before active learning (zero-shot), many high-error predictions still receive moderate uncertainty, reflecting overconfidence under shift.
+          After selecting a support set via uncertainty-aware acquisition, errors are reduced and remaining mistakes concentrate in regions of higher uncertainty, showing that BayesVLM’s uncertainty is better aligned with errors and supports more effective sample selection.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-4" style="margin-top: 2rem;">4.2 Active Learning</h3>
+        <p class="content has-text-justified" style="margin-top: -0.5rem;">
+          We use BayesVLM’s uncertainty estimates to select informative samples for adaptation with Bayesian acquisition functions.
+          This yields more sample-efficient selection compared to entropy-based and random baselines.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <img src="asset/fig4_active_learning.png" loading="lazy"
+             style="width: 95%; height: auto; margin: 0 auto;" />
+        <div class="content" style="margin-top: 10px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: center;">
+            <span style="display: inline-flex; align-items: center; gap: 8px;">
+              <span style="width: 34px; height: 0; border-top: 3px solid #4FC3F7;"></span>
+              <span class="is-size-7">EPIG</span>
+            </span>
+            <span style="display: inline-flex; align-items: center; gap: 8px;">
+              <span style="width: 34px; height: 0; border-top: 3px solid #1E88E5;"></span>
+              <span class="is-size-7">BALD</span>
+            </span>
+            <span style="display: inline-flex; align-items: center; gap: 8px;">
+              <span style="width: 34px; height: 0; border-top: 3px solid #8E24AA;"></span>
+              <span class="is-size-7">Entropy (targeted)</span>
+            </span>
+            <span style="display: inline-flex; align-items: center; gap: 8px;">
+              <span style="width: 34px; height: 0; border-top: 3px solid #E53935;"></span>
+              <span class="is-size-7">Entropy</span>
+            </span>
+            <span style="display: inline-flex; align-items: center; gap: 8px;">
+              <span style="width: 34px; height: 0; border-top: 3px solid #000000;"></span>
+              <span class="is-size-7">Random (targeted)</span>
+            </span>
+            <span style="display: inline-flex; align-items: center; gap: 8px;">
+              <span style="width: 34px; height: 0; border-top: 3px dashed #9E9E9E;"></span>
+              <span class="is-size-7">Random</span>
+            </span>
+          </div>
+        </div>
+        <p class="content has-text-justified" style="margin-top: 10px;">
+          <b>Active learning (Fig. 4):</b> Using BayesVLM uncertainties for EPIG/BALD improves adaptation across subset sizes.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-4" style="margin-top: 2rem;">4.3 Efficiency &amp; Robustness</h3>
+        <p class="content has-text-justified" style="margin-top: -0.5rem;">
+          We analyze the computational overhead of BayesVLM and study robustness to design choices such as curvature and proxy-data Hessian estimation.
+          We also illustrate how ProbCosine captures increasing uncertainty under input corruption.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-centered">
+        <img src="asset/fig5_probcosine_corruption.png" loading="lazy"
+             style="width: 70%; height: auto; margin: 0 auto;" />
+        <p class="content has-text-justified" style="margin-top: 10px;">
+          <b>ProbCosine under corruption (Fig. 5):</b> mean similarity decreases and variance increases with input corruption.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -185,11 +400,11 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code class="language-bibtex">@article{baumann2024bayesvlm,
-  title = {Post-hoc Probabilistic Vision-Language Models},
-  author = {Anton Baumann, Rui Li, Marcus Klasson, Santeri Mentu, Shyamgopal Karthik, Zeynep Akata, Arno Solin and Martin Trapp},
-  year = {2024},
-  journal = {arXiv preprint arxiv:2412.06014}
+    <pre><code class="language-bibtex">@inproceedings{baumann2026bayesvlm,
+  title     = {Post-hoc Probabilistic Vision-Language Models},
+  author    = {Baumann, Anton and Li, Rui and Klasson, Marcus and Mentu, Santeri and Karthik, Shyamgopal and Akata, Zeynep and Solin, Arno and Trapp, Martin},
+  booktitle = {International Conference on Learning Representations {(ICLR)}},
+  year      = {2026},
 }</code></pre>
   </div>
 </section>
