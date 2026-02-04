@@ -159,11 +159,11 @@ ucf101/
 ## Citation
 
 ```bibtex
-@article{baumann2024bayesvlm,
-  title = {Post-hoc Probabilistic Vision-Language Models},
-  author = {Anton Baumann, Rui Li, Marcus Klasson, Santeri Mentu, Shyamgopal Karthik, Zeynep Akata, Arno Solin and Martin Trapp},
-  year = {2024},
-  journal = {arXiv preprint arxiv:2412.06014}
+@inproceedings{baumann2026bayesvlm,
+  title     = {Post-hoc Probabilistic Vision-Language Models},
+  author    = {Baumann, Anton and Li, Rui and Klasson, Marcus and Mentu, Santeri and Karthik, Shyamgopal and Akata, Zeynep and Solin, Arno and Trapp, Martin},
+  booktitle = {International Conference on Learning Representations {(ICLR)}},
+  year      = {2026},
 }
 ```
 
