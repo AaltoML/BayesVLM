@@ -1,9 +1,11 @@
 # Post-hoc Probabilistic Vision-Language Models
 
-![image](pipeline.png)
+[![arXiv](https://img.shields.io/badge/arXiv-2412.06014-b31b1b.svg)](https://arxiv.org/abs/2412.06014)
+[![Project Page](https://img.shields.io/badge/Project-Page-blue)](https://aaltoml.github.io/BayesVLM/)
+[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Models-yellow)](https://huggingface.co/collections/aalto-ml/bayesvlm)
 
-Paper: [https://arxiv.org/abs/2412.06014](https://arxiv.org/abs/2412.06014)\
-Project page: [https://aaltoml.github.io/BayesVLM/](https://aaltoml.github.io/BayesVLM/)
+
+![image](pipeline.png)
 
 # Setup Instructions
 1. Ensure you have Python version `>= 3.11` installed.
