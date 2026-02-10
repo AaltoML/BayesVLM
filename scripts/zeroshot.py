@@ -73,7 +73,7 @@ def main(
         lr=1e-2,
         num_steps=1000,
         device=device,
-        verbose=False,
+        verbose=True,
     ).item()
 
     info['lambda_txt'] = optimize_prior_precision(
@@ -85,7 +85,7 @@ def main(
         lr=1e-2,
         num_steps=1000,
         device=device,
-        verbose=False,
+        verbose=True,
     ).item()
     print("\tn_img:", info['n_img'])
     print("\tn_txt:", info['n_txt'])
