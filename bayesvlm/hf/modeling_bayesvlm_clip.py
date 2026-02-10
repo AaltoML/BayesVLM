@@ -34,6 +34,13 @@ def _std_from_var(var: torch.Tensor | None) -> torch.Tensor | None:
         return None
     return torch.sqrt(var)
 
+def _get_output(outputs, name: str, index: int):
+    if hasattr(outputs, name):
+        return getattr(outputs, name)
+    if isinstance(outputs, (tuple, list)) and len(outputs) > index:
+        return outputs[index]
+    return None
+
 def _normalize_mean_and_var(
     mean: torch.Tensor,
     var: torch.Tensor,
@@ -136,9 +143,11 @@ class BayesVLMTextModel(CLIPTextModelWithProjection):
             position_ids=position_ids,
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
-            return_dict=True,
         )
-        pooled_output = text_outputs.pooler_output
+        pooled_output = _get_output(text_outputs, "pooler_output", 1)
+        last_hidden_state = _get_output(text_outputs, "last_hidden_state", 0)
+        hidden_states = _get_output(text_outputs, "hidden_states", 2)
+        attentions = _get_output(text_outputs, "attentions", 3)
         text_embeds = self.text_projection(pooled_output)
 
         text_var = _diag_cov(
@@ -155,9 +164,9 @@ class BayesVLMTextModel(CLIPTextModelWithProjection):
             text_embeds=text_embeds,
             text_embeds_var=text_var,
             text_embeds_std=text_std,
-            last_hidden_state=text_outputs.last_hidden_state,
-            hidden_states=text_outputs.hidden_states,
-            attentions=text_outputs.attentions,
+            last_hidden_state=last_hidden_state,
+            hidden_states=hidden_states,
+            attentions=attentions,
         )
 
 
@@ -194,9 +203,11 @@ class BayesVLMVisionModel(CLIPVisionModelWithProjection):
             pixel_values=pixel_values,
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
-            return_dict=True,
         )
-        pooled_output = vision_outputs.pooler_output
+        pooled_output = _get_output(vision_outputs, "pooler_output", 1)
+        last_hidden_state = _get_output(vision_outputs, "last_hidden_state", 0)
+        hidden_states = _get_output(vision_outputs, "hidden_states", 2)
+        attentions = _get_output(vision_outputs, "attentions", 3)
         image_embeds = self.visual_projection(pooled_output)
 
         image_var = _diag_cov(
@@ -213,9 +224,9 @@ class BayesVLMVisionModel(CLIPVisionModelWithProjection):
             image_embeds=image_embeds,
             image_embeds_var=image_var,
             image_embeds_std=image_std,
-            last_hidden_state=vision_outputs.last_hidden_state,
-            hidden_states=vision_outputs.hidden_states,
-            attentions=vision_outputs.attentions,
+            last_hidden_state=last_hidden_state,
+            hidden_states=hidden_states,
+            attentions=attentions,
         )
 
 
@@ -311,9 +322,8 @@ class BayesVLMModel(CLIPModel):
             position_ids=position_ids,
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
-            return_dict=True,
         )
-        pooled_output = text_outputs[1]
+        pooled_output = _get_output(text_outputs, "pooler_output", 1)
         text_embeds = self.text_projection(pooled_output)
 
         text_var = _diag_cov(
@@ -349,9 +359,8 @@ class BayesVLMModel(CLIPModel):
             pixel_values=pixel_values,
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
-            return_dict=True,
         )
-        pooled_output = vision_outputs[1]
+        pooled_output = _get_output(vision_outputs, "pooler_output", 1)
         image_embeds = self.visual_projection(pooled_output)
 
         image_var = _diag_cov(
@@ -404,17 +413,15 @@ class BayesVLMModel(CLIPModel):
             position_ids=position_ids,
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
-            return_dict=True,
         )
         vision_outputs = self.vision_model(
             pixel_values=pixel_values,
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
-            return_dict=True,
         )
 
-        text_pooled = text_outputs[1]
-        image_pooled = vision_outputs[1]
+        text_pooled = _get_output(text_outputs, "pooler_output", 1)
+        image_pooled = _get_output(vision_outputs, "pooler_output", 1)
 
         text_embeds = self.text_projection(text_pooled)
         image_embeds = self.visual_projection(image_pooled)
